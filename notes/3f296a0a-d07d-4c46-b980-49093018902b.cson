@@ -1,0 +1,20 @@
+createdAt: "2020-04-30T02:18:37.748Z"
+updatedAt: "2020-05-08T06:36:14.582Z"
+type: "MARKDOWN_NOTE"
+folder: "ff82907153aa97c03b03"
+title: "Jenkins"
+tags: []
+content: '''
+  # Jenkins
+  
+  Jenkins是一个开源的、提供友好操作界面的持续集成(CI)工具,主要用于持续、自动的构建/测试软件项目、监控外部任务的运行
+  
+   CI(Continuous integration，中文意思是持续集成)是一种软件开发时间。持续集成强调开发人员提交了新代码之后，立刻进行构建、（单元）测试。根据测试结果，我们可以确定新代码和原有代码能否正确地集成在一起。
+  
+  CD(Continuous Delivery， 中文意思持续交付)是在持续集成的基础上，将集成后的代码部署到更贴近真实运行环境(类生产环境)中。比如，我们完成单元测试后，可以把代码部署到连接数据库的Staging环境中更多的测试。如果代码没有问题，可以继续手动部署到生产环境。
+  
+  
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

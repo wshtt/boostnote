@@ -1,0 +1,278 @@
+createdAt: "2020-04-14T01:18:27.011Z"
+updatedAt: "2020-05-15T01:25:15.026Z"
+type: "MARKDOWN_NOTE"
+folder: "ff82907153aa97c03b03"
+title: "SpringBoot"
+tags: [
+  "SpringBoot"
+]
+content: '''
+  # SpringBoot
+  
+  一、主目录：
+  
+        src/main/java  程序开发以及主程序入口
+        src/main/resources 配置文件
+        src/test/java  测试程序
+      
+  二、结构：
+  
+        com
+          example
+            myproject
+              Application.java  启动类
+              domain            实体类
+                Customer.java
+              service           service
+                CustomerService.java
+              controller        controller
+                CustomerController.java
+                
+  三、pom.xml引入依赖
+  
+        spring-boot-starter-web
+        spring-boot-starter-test
+        
+  四、yml 文件中配置端口
+  
+  五、controller 必须传输json 数据，@RestController
+  
+  六、单元测试
+      放在启动类同目录包下，或者添加 @SpringBootTest(class = xxxApplication) 才能执行容器注入等。
+    
+  
+        @RunWith(SpringRunner.class)
+        @SpringBootTest(class = xxxApplication) //启动类
+        public class HelloWorldControlerTests{
+        
+          @Test
+          public void getHello(){
+          
+          }
+        }
+        
+  七、自定义filter
+  
+        1.编写配置类，实现Filter 中的方法
+        2.添加 @Configuration 注解
+  
+  八、读取配置文件中的参数
+  
+        自定义配置类
+        @Component   注入ioc
+        @ConfigurationProperties(prefix = "demo")    读取配置文件数据，prefix 指定前缀
+        @PropertySource(value = "config.properties")    当配置文件不是application.yml 时，指定配置文件名。
+        public class ConfigBeanProp {
+  
+            private String phone;     参数名对应字段名
+  
+            private String wife;
+        }
+        
+  九、默认日志
+  
+        logging.path=/user/local/log       日志打印路径
+        logging.file=spring.log            日志文件名 （默认）
+        logging.level.com.favorites=DEBUG  日志级别 logging.level
+        logging.level.org.springframework.web=INFO   
+        logging.level.org.hibernate=ERROR   
+        logging.pattern.console=%d{yyyy/MM/dd-HH:mm:ss} [%thread] %-5level %logger- %msg%n    自定义日志格式
+        logging.pattern.file=%d{yyyy/MM/dd-HH:mm} [%thread] %-5level %logger- %msg%n          
+  
+  十、整合jpa
+  
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+        
+        # mysql 配置
+        spring:
+          datasource:
+            driver-class-name: com.mysql.jdbc.Driver
+            url: jdbc:mysql://192.168.1.20:3306/test
+            username: root
+            password: root
+            type： com.alibaba.druid.pool.DruidDataSource
+            
+        spring.jpa.properties.hibernate.hbm2ddl.auto=update
+        spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL5InnoDBDialect
+        spring.jpa.show-sql= true
+  
+  十一、整合 mybatisplus
+  
+        <!-- druid数据库连接池 -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <version>${druid.version}</version>
+        </dependency>
+  
+        <!-- mysql connector -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+  
+        <!-- Mybatis-plus -->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatisplus-spring-boot-starter</artifactId>
+            <version>${mybatisplus-spring-boot-starter.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus</artifactId>
+            <version>${mybatis-plus.version}</version>
+        </dependency>
+  
+        # mysql 配置
+        spring:
+          datasource:
+            driver-class-name: com.mysql.jdbc.Driver
+            url: jdbc:mysql://192.168.1.20:3306/test
+            username: root
+            password: root
+            type： #数据连接池
+  
+        mybatis-plus:
+          # xml扫描，多个目录用逗号或者分号分隔（告诉 Mapper 所对应的 XML 文件位置）
+          mapper-locations: classpath:mapper/*.xml
+          # 以下配置均有默认值,可以不设置
+          global-config:
+            db-config:
+              #主键类型  auto:"数据库ID自增" 1:"用户输入ID",2:"全局唯一ID (数字类型唯一ID)", 3:"全局唯一ID UUID";
+              id-type: auto
+              #字段策略 IGNORED:"忽略判断"  NOT_NULL:"非 NULL 判断")  NOT_EMPTY:"非空判断"
+              field-strategy: NOT_EMPTY
+              #数据库类型
+              db-type: MYSQL
+          configuration:
+            # 是否开启自动驼峰命名规则映射:从数据库列名到Java属性驼峰命名的类似映射
+            map-underscore-to-camel-case: true
+            # 如果查询结果中包含空值的列，则 MyBatis 在映射的时候，不会映射这个字段
+            call-setters-on-nulls: true
+            # 这个配置会将执行的sql打印出来，在开发或测试的时候可以用
+            log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  
+  
+          启动类添加注解扫描dao 
+          @SpringBootApplication
+          @MapperScan(basePackages = {"com.mp.demo.dao"}) //扫描DAO
+          
+          配置类
+          /**
+           * @Description MybatisPlus配置类
+           */
+          @Configuration
+          public class MybatisPlusConfig {
+              /**
+               * mybatis-plus SQL执行效率插件【生产环境可以关闭】
+               */
+              @Bean
+              public PerformanceInterceptor performanceInterceptor() {
+                  return new PerformanceInterceptor();
+              }
+              /**
+               * 分页插件
+               */
+              @Bean
+              public PaginationInterceptor paginationInterceptor() {
+                  return new PaginationInterceptor();
+              }
+          }
+          
+          Entity 类
+          @TableName("user_info")    //@TableName中的值对应着表名
+          public class UserInfoEntity {
+  
+              /**
+               * 主键
+               * @TableId中可以决定主键的类型,不写会采取默认值,默认值可以在yml中配置
+               * AUTO: 数据库ID自增
+               * INPUT: 用户输入ID
+               * ID_WORKER: 全局唯一ID，Long类型的主键
+               * ID_WORKER_STR: 字符串全局唯一ID
+               * UUID: 全局唯一ID，UUID类型的主键
+               * NONE: 该类型为未设置主键类型
+               */
+              @TableId(type = IdType.AUTO)
+              private Long id;
+  
+          //dao 
+          public interface UserInfoDao extends BaseMapper<UserInfoEntity> {
+          }
+          
+          //service
+          public interface UserInfoService extends IService<UserInfoEntity> {
+          }
+          
+          //serviceimpl
+          @Service
+          @Transactional
+          public class UserInfoSerivceImpl extends ServiceImpl<UserInfoDao, UserInfoEntity> implements UserInfoService {
+          }
+  
+  
+          setSqlSelect	  设置 SELECT 查询字段
+          where	          WHERE 语句，拼接 + WHERE 条件
+          and	            AND 语句，拼接 + AND 字段=值
+          or	            OR 语句，拼接 + OR 字段=值
+          eq	            等于=
+          allEq	          基于 map 内容等于=
+          ne	            不等于<>
+          gt	            大于>
+          ge	            大于等于>=
+          lt	            小于<
+          le	            小于等于<=
+          like	          模糊查询 LIKE
+          notLike	        模糊查询 NOT LIKE
+          in	            IN 查询
+          notIn	          NOT IN 查询
+          isNull	        NULL 值查询
+          isNotNull	      IS NOT NULL
+          groupBy	        分组 GROUP BY
+          having	        HAVING 关键词
+          orderBy	        排序 ORDER BY
+          orderByAsc	    ASC 排序 ORDER BY
+          orderByDesc	    DESC 排序 ORDER BY
+          exists	        EXISTS 条件语句
+          notExists	      NOT EXISTS 条件语句
+          between	        BETWEEN 条件语句
+          notBetween	    NOT BETWEEN 条件语句
+          addFilter	      自由拼接 SQL
+          last	          拼接在最后，例如：last("LIMIT 1")
+  
+  十二、整合 Redis
+  
+          <dependency>
+              <groupId>org.springframework.boot</groupId>
+              <artifactId>spring-boot-starter-data-redis</artifactId>
+          </dependency>
+  
+          spring:
+              redis:
+                host: 127.0.0.1 
+                port: 6379
+                password: 123456
+                jedis:
+                  pool:
+                    max-active: 8
+                    max-wait: -1
+                    max-idle: 500
+                    min-idle: 0
+                lettuce:
+                  shutdown-timeout: 0
+  
+  
+  
+  
+        
+'''
+linesHighlighted: [
+  244
+  209
+]
+isStarred: false
+isTrashed: false

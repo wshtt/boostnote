@@ -1,0 +1,21 @@
+createdAt: "2020-04-20T09:12:50.074Z"
+updatedAt: "2020-06-01T07:49:16.819Z"
+type: "MARKDOWN_NOTE"
+folder: "a2b660d615c2e40867f9"
+title: "mysql  保留字段"
+tags: [
+  "MySQL_保留字段"
+]
+content: '''
+  mysql  保留字段
+  
+  mysql  保留字段作为字段名 会出现很多问题，尽量不要使用
+  
+  mybatis-plus 查寻保留字段 方法 	
+  
+  在entity 相应属性上添加此注解，相当于sql 查询时字段加了'option'
+  @TableField("`option`")
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

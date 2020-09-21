@@ -1,0 +1,191 @@
+createdAt: "2020-09-21T03:40:32.276Z"
+updatedAt: "2020-09-21T09:11:49.399Z"
+type: "MARKDOWN_NOTE"
+folder: "ff82907153aa97c03b03"
+title: "Git"
+tags: []
+content: '''
+  # Git
+  
+  #### 工作流程
+  
+  一般工作流程如下：
+  
+  >克隆 Git 资源作为工作目录。
+  >在克隆的资源上添加或修改文件。
+  >如果其他人修改了，你可以更新资源。
+  >在提交前查看修改。
+  >提交修改。
+  >在修改完成后，如果发现错误，可以撤回提交并再次修改并提交。
+  >
+  
+  
+  
+  #### 问题 一
+  
+      git上传代码报错
+      
+      $ ssh -T git@github.com
+      ssh: connect to host github.com port 22: Connection timed out
+  
+      
+      $ git push -u origin master
+      fatal: 'git@github.com/wushutong/record.git' does not appear to be a git repository
+      fatal: Could not read from remote repository.
+  
+      Please make sure you have the correct access rights
+      and the repository exists.
+  
+  >这个时候需要检查一下SSH是否能够连接成功，输入以下命令
+  `ssh -T git@github.com`
+      
+      $ ssh -T git@github.com
+      ssh: connect to host github.com port 22: Connection timed out
+  
+  >打开存放ssh的目录(windows 在user目录下)
+  
+  `cd ~/.ssh`  进 .ssh 目录
+  
+  `ls`  查看文件
+  
+  >查看是否存在 id_rsa   id_rsa.pun  known_hosts 三个文件 目的就是查看此设备有没有配置过SSH key
+  >如果没有，就是缺少 ssh key，生成即可
+  
+  >如果存在，则新建config文件输入下面内容
+  
+  >Host github.com
+  User 2656439669@qq.com
+  Hostname ssh.github.com
+  PreferredAuthentications publickey
+  IdentityFile ~/.ssh/id_rsa
+  Port 443
+  
+  >其中User后面为GitHub的账号名称(邮箱)
+  
+  >创建方法：
+  
+  `vim comfig`
+  
+  >然后编辑，最后:wq退出
+  
+  >保存之后再次执行"ssh -T git@github.com"时，会出现如下提示，回车"yes"即可
+  
+      $ ssh -T git@github.com
+      The authenticity of host '[ssh.github.com]:443 ([18.140.96.234]:443)' can't be established.
+      RSA key fingerprint is SHA256:nThbg6kXUpJWGl7E1IGOCspRomTxdCARLviKw6E5SY8.
+      Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+      Warning: Permanently added '[ssh.github.com]:443,[18.140.96.234]:443' (RSA) to the list of known hosts.
+      Hi wushutong! You've successfully authenticated, but GitHub does not provide shell access.
+      
+      $ ssh -T git@github.com
+      Hi wushutong! You've successfully authenticated, but GitHub does not provide shell access.
+  
+  
+  #### 生成 ssh key
+      
+      生成key命令
+      $ ssh-keygen -t rsa -C "邮箱"
+      
+  下面的输入内容可以不写，直接回车，但是默认名称就是id_rsa.如果我们在以后也需要配置ssh，那么容易产生混淆。建议后面加上ssh为何而建。也是为了避免ssh覆盖。
+  
+  Enter file in which to save the key (/Users/apple/.ssh/id_rsa): /Users/apple/.ssh/id_rsa_oschina 配置保存目录
+  
+  Enter passphrase (empty for no passphrase):  输入密码
+  
+  Enter same passphrase again:   再次输入密码
+  
+      $ ssh-keygen -t rsa -C "2656439669@qq.com"
+      Generating public/private rsa key pair.
+      Enter file in which to save the key (/c/Users/Administrator/.ssh/id_rsa):
+      /c/Users/Administrator/.ssh/id_rsa already exists.
+      Overwrite (y/n)? y
+      Enter passphrase (empty for no passphrase):
+      Enter same passphrase again:
+      Your identification has been saved in /c/Users/Administrator/.ssh/id_rsa
+      Your public key has been saved in /c/Users/Administrator/.ssh/id_rsa.pub
+      The key fingerprint is:
+      SHA256:KTRHEO7LiRm1YiwHceMWjhiX2Cv09ZQ7UBEdnFCLo9M 2656439669@qq.com
+      The key's randomart image is:
+      +---[RSA 3072]----+
+      |.oo.+ +BXoo      |
+      |.=o* * +.+.      |
+      |o +.= Ooo.       |
+      |. .= +oB..       |
+      | .. *o+ES        |
+      |   + *.+         |
+      |    o +          |
+      |                 |
+      |                 |
+      +----[SHA256]-----+
+  
+      命令行复制key的命令如下：
+      clip < ~/.ssh/id_rsa.pub   执行完毕直接去服务端粘贴即可
+      
+      查看key命令：
+      cat < ~/.ssh/id_rsa.osc.pub    可以查看你的key
+      
+      $ cat < ~/.ssh/id_rsa.pub
+      ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC+kHYOhxBWSk9XydyJt9FmmNTlOHPGN8RfzKAXXZjUPbCZ9ygVNVef0SgDBNZkun0xTkTuXjZFzJeZlY+durijBpaNE6SU+3/G+hvcshheRiemS0J+dPSUBrFe4OrZhut5JB9cZA1JmHOWlGDXhwcGTrKUoLDVGCk2jbGNsXNPXGsICVLk3PrmYquJW9a5RYKTg6noNX3xVoEur+DEybqxhiGiUkwIzkYlFYFxt3s6CRSNrhnRKLVXGoPZPDjT6GsUl8loo6Z4wvt4X9XpMM1BjGySSCBMXehiQl9Ic3bwE84NK5/QXwe1HTvE7daOOX+SzKKx9cOjh/uRvRQn0j/+9f3DbYcmi+mT4ID/11Nd6uKa+h5+TKe+4PF2yaDuhQMXjDSn8/g3cUgrKqfIA4wVuhRoH+f2cPBaXjaMtT5kk3+iwT7XRSJe1mi15QNR2WUS1eJP+2/R0PHWTqN1R4BUpo/h6CNsbYaPiyQfe2P8LZe/22MXp9UhmfL8qgE1R2s= 2656439669@qq.com
+      
+      
+  
+  
+      
+      
+  #### 创建 config 配置多个 ssh key
+      
+      在 .ssh 目录下创建 config
+      vim config
+  
+      在config文件中编辑
+  
+      #osOne   注释
+  
+      Host github.com   这是 ssh -T git@github.com 命令的@ 后面的部分，相当于一个名字 
+  
+          HostName ssh.github.com   HostName就是git托管的平台url
+  
+          User 2656439669@qq.com    用户名
+  
+          IdentityFile ~/.ssh/id_rsa_aaa   指定文件 ~/.ssh/id_rsa
+  
+  
+  
+      #osTwo  
+  
+      Host myOschina
+  
+          HostName git.oschina.net
+  
+          User git
+  
+          IdentityFile ~/.ssh/id_rsa_myOschina
+  
+  
+  
+  
+      然后 :wq 保存退出。
+  
+  
+  #### 远程库链接
+        
+        查看远程库信息：
+        $ git remote -v
+        origin  git@github.com/wushutong/record.git (fetch)
+        origin  git@github.com/wushutong/record.git (push)
+  
+        删除关联的origin的远程库
+        $ git remote rm origin
+  
+        再次链接
+        $ git remote add origin git@github.com:wushutong/boostnote.git
+  
+        重复链接异常      
+        fatal: remote origin already exists. 
+'''
+linesHighlighted: [
+  76
+  127
+]
+isStarred: false
+isTrashed: false

@@ -1,0 +1,50 @@
+{
+  "folders": [
+    {
+      "key": "ff82907153aa97c03b03",
+      "color": "#1278BD",
+      "name": "Default"
+    },
+    {
+      "key": "1b847052de9991bf093f",
+      "color": "#E8D252",
+      "name": "每日记录"
+    },
+    {
+      "key": "8ba0d00e76feae1e9815",
+      "color": "#E8D252",
+      "name": "事件"
+    },
+    {
+      "key": "06a40e90ecf6b59ec4bd",
+      "color": "#E8D252",
+      "name": "日记"
+    },
+    {
+      "key": "a8ddcc7d582aa33cc612",
+      "color": "#30D5C8",
+      "name": "密码"
+    },
+    {
+      "key": "f641fe3577d5d5a32c12",
+      "color": "#E10051",
+      "name": "框架"
+    },
+    {
+      "key": "a2b660d615c2e40867f9",
+      "color": "#E8D252",
+      "name": "MySQL"
+    },
+    {
+      "key": "10e4b01b9a7b331312b2",
+      "color": "#2BA5F7",
+      "name": "软件"
+    },
+    {
+      "key": "2a4f69d6e8fbaeba74e9",
+      "color": "#3FD941",
+      "name": "杂记"
+    }
+  ],
+  "version": "1.0"
+}

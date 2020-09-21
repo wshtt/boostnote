@@ -1,0 +1,23 @@
+createdAt: "2020-06-10T04:04:37.952Z"
+updatedAt: "2020-06-10T04:04:58.402Z"
+type: "MARKDOWN_NOTE"
+folder: "ff82907153aa97c03b03"
+title: "hutool"
+tags: []
+content: '''
+  # hutool
+      
+      //
+        <!-Maven 引入 hutool->
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>5.2.5</version>
+        </dependency>
+  
+        //Gradle
+        compile 'cn.hutool:hutool-all:5.2.5'
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

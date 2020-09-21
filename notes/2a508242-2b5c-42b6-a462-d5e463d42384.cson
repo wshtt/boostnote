@@ -1,0 +1,23 @@
+type: "MARKDOWN_NOTE"
+content: '''
+  # 查询问题
+  
+  1. mybatis 的 like 查询
+  
+          #{...}解析成sql语句时候，会在变量外侧自动加单引号'',所以这里 % 需要使用双引号"  "，不能使用单引号 '  '，不然会查不到任何结果。
+          like "%"#{value,jdbcType=varchar}"%"
+          
+          like concat('%'#{value}'%',jdbcType=varchar)
+          
+          ${...}  由于$是参数直接注入的，导致这种写法，大括号里面不能注明jdbcType
+          like '%${value}%'
+'''
+linesHighlighted: []
+title: "查询问题"
+folder: "ff82907153aa97c03b03"
+createdAt: "2020-06-02T02:04:06.913Z"
+updatedAt: "2020-06-02T02:07:15.424Z"
+isStarred: false
+isTrashed: false
+tags: []
+isPinned: false

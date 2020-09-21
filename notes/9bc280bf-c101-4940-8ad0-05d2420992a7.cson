@@ -1,0 +1,30 @@
+createdAt: "2020-06-02T03:27:34.559Z"
+updatedAt: "2020-06-05T06:53:54.811Z"
+type: "MARKDOWN_NOTE"
+folder: "10e4b01b9a7b331312b2"
+title: "压力测试"
+tags: []
+content: '''
+  # 压力测试 
+  [全网最全最细的jmeter接口测试教程以及接口测试流程详解 - 长沙逍遥子 - 博客园]
+  (https://www.cnblogs.com/csmashang/p/12762177.html)
+  
+  1. 测试的一些概念
+  
+          性能测试 : 此测试在给定的基础架构配置下设置最佳性能预期.如果在应用程序投入生产之前需要进行任何更改，它还会在测试过程的早期突出显示.
+  
+          负载测试 :  该测试基本上用于在设计为在其下运行的顶部负载下测试系统.
+  
+          压力测试 : 此测试试图通过压倒其资源来破坏系统.
+          
+  2. JMeter是
+  
+          一个Java桌面应用程序，带有使用Swing图形API的图形界面.因此，它可以在任何接受Java虚拟机的环境/工作站上运行
+          
+          JMeter支持的协议是 :
+  
+                  Web :  HTTP，HTTPS站点'web 1.0'web 2.0(ajax，flex和flex-ws-amf)
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

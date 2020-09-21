@@ -1,0 +1,28 @@
+createdAt: "2020-04-27T09:11:28.162Z"
+updatedAt: "2020-06-10T04:07:42.359Z"
+type: "MARKDOWN_NOTE"
+folder: "ff82907153aa97c03b03"
+title: "MongoDB"
+tags: [
+  "MongoDB"
+]
+content: '''
+  
+  # MongoDB
+  
+  1.  "show dbs" 命令可以显示所有数据的列表。
+  2.  执行 "db" 命令可以显示当前数据库对象或集合。
+  3.  运行"use db"命令，可以连接到一个指定的数据库。
+  
+  
+  $数据库名$
+      不能是空字符串
+      不得含有'' 空格 . $ 、/、\\0
+      应该全部小写
+      最多64字节
+      
+  $$
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

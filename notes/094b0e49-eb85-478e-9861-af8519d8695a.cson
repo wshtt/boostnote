@@ -1,0 +1,56 @@
+createdAt: "2020-06-10T04:05:35.952Z"
+updatedAt: "2020-06-10T04:05:54.489Z"
+type: "MARKDOWN_NOTE"
+folder: "ff82907153aa97c03b03"
+title: "git"
+tags: []
+content: '''
+  # git
+            
+            Git修改和配置用户名和邮箱
+            git在push/push to时需要使用到user.name和user.email，切记一定要现配置好
+            查看
+  
+                  user.name/user.email
+  
+                  git config user.name
+                  git config user.email
+  
+            查看所有配置信息
+  
+                  git config --list
+  
+            配置
+  
+                  user.name/user.email
+  
+                  git config user.name "newName"
+                  git config user.email "newEmail"
+  
+            加上--global可以全局修改，否则仅在本git-repo生效。
+            配置全局
+  
+                  user.name/user.email
+  
+                  git config --global user.name "your user name"
+                  git config --global user.email "your user email"
+  
+            这里需要注意的是，该命令只能用于初次配置user.name/email，如果不小心配置错误，或者重复配置，不可以通过重复执行以上命令来修改user.name/email，否则可能或报错说无法重复配置，或者导致一个key配置了多个value。
+            修改user.name/user.email
+            如果想要修改已经配置过的user.name或email，有两种方式，一种是通过git bash来修改；一种是直接修改.gitconfig文件。
+  
+            1. git bash
+  
+                    git config --global --replace-all user.name "your user name"
+                    git config --global --replace-all user.email"your user email"
+  
+            2. 修改.gitconfig文件
+            该文件是隐藏文件，位于C:\\Users\\{user}\\.gitconfig，直接修改里边的name或者email，如果有重复的name或email，可以将其删掉，只剩下一个就好。
+            修改完，通过git bash输入git config –list可以查看是否修改成功了。
+            修改最近一次commit的user.name/user.email
+  
+                    git commit --amend --author="userName <userEmail>"
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false
