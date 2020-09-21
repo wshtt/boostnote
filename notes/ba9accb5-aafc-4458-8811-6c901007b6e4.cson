@@ -1,5 +1,5 @@
 createdAt: "2020-09-21T03:40:32.276Z"
-updatedAt: "2020-09-21T09:11:49.399Z"
+updatedAt: "2020-09-21T10:43:58.852Z"
 type: "MARKDOWN_NOTE"
 folder: "ff82907153aa97c03b03"
 title: "Git"
@@ -19,8 +19,82 @@ content: '''
   >在修改完成后，如果发现错误，可以撤回提交并再次修改并提交。
   >
   
+  #### 创建 Git 仓库
+      
+      初始化当前目录，该命令执行完后会在当前目录生成一个 .git 目录。使用我们指定目录作为Git仓库。
+      git init
+      
+      初始化当前目录下的指定文件夹
+      git init newrepo
+  
+      克隆项目  [url] 是你要拷贝的项目
+      git clone [url]  
+      
+      在当前目录下创建一个名为grit的目录，作为git 仓库。
+      $ git clone $ git clone git@github.com:wushutong/boostnote.git
+      指定 mygrit 文件夹为 git 仓库
+      $ git clone $ git clone git@github.com:wushutong/boostnote.git mygrit
+      
+      显示当前 git 配置信息
+      $ git config --list
+      
+      编辑 git 配置文件
+      $ git config -e    # 针对当前仓库 
+      $ git config -e --global   # 针对系统上所有仓库
+      如果去掉 --global 参数只对当前仓库有效。
+      
+  #### 常用命令
+  
+  ![1622372b.png](:storage\\ba9accb5-aafc-4458-8811-6c901007b6e4\\1622372b.png)
+  
+  >workspace：工作区
+  staging area：暂存区/缓存区
+  local repository：或本地仓库
+  remote repository：远程仓库
   
   
+  ###### git add
+        git add 命令可将该文件添加到暂存区。
+  
+        添加一个或多个文件到暂存区：
+        git add [file1] [file2] ...
+        git add a b.java c.txt ...
+        
+        添加指定目录到暂存区，包括子目录：
+        git add [dir]
+        
+        添加当前目录下的所有文件到暂存区：
+        git add .
+  
+  ###### git status
+        git status 命令用于查看在你上次提交之后是否有对文件进行再次修改。
+        分为好几个标识符？？？？？？
+        
+  ###### git diff
+        git diff 命令比较文件的不同，即比较文件在暂存区和工作区的差异。
+        
+        显示暂存区和工作区的差异:
+        $ git diff [file]
+        
+        显示暂存区和上一次提交(commit)的差异:
+        $ git diff --cached [file]
+        或
+        $ git diff --staged [file]
+        
+        显示两次提交之间的差异:
+        $ git diff [first-branch]...[second-branch]
+        
+  ###### git commit
+        git commit 命令将暂存区内容添加到本地仓库中。
+        
+        提交暂存区到本地仓库中: 要输入日志消息 ""
+        git commit -m [message]
+  
+        提交暂存区的指定文件到仓库区：
+        $ git commit [file1] [file2] ... -m [message]
+        
+        -a 参数设置修改文件后不需要执行 git add 命令，直接来提交 跳过add，相当于自动add
+        $ git commit -a
   #### 问题 一
   
       git上传代码报错
@@ -184,8 +258,9 @@ content: '''
         fatal: remote origin already exists. 
 '''
 linesHighlighted: [
-  76
-  127
+  89
+  150
+  201
 ]
 isStarred: false
 isTrashed: false
