@@ -1,11 +1,11 @@
 createdAt: "2020-09-10T03:46:03.686Z"
-updatedAt: "2020-09-11T08:49:33.472Z"
+updatedAt: "2020-09-22T06:10:02.534Z"
 type: "MARKDOWN_NOTE"
 folder: "f641fe3577d5d5a32c12"
-title: "element"
+title: "element UI"
 tags: []
 content: '''
-  #element
+  # element UI
   [Element - The world's most popular Vue UI framework](https://element.eleme.cn/#/zh-CN/component/date-picker)
   
   #### 使用
