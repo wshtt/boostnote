@@ -1,5 +1,5 @@
 createdAt: "2020-09-21T03:40:32.276Z"
-updatedAt: "2020-09-21T10:43:58.852Z"
+updatedAt: "2020-09-22T10:45:16.106Z"
 type: "MARKDOWN_NOTE"
 folder: "ff82907153aa97c03b03"
 title: "Git"
@@ -95,20 +95,78 @@ content: '''
         
         -a 参数设置修改文件后不需要执行 git add 命令，直接来提交 跳过add，相当于自动add
         $ git commit -a
+        
+  ###### git push
+        
+        git push 命用于从将本地的分支版本上传到远程并合并。
+  
+  ```shell
+  
+  git push <远程主机名> <本地分支名>:<远程分支名>
+  $ git push origin master:master
+  
+  如果本地分支名与远程分支名相同，则可以省略冒号：
+  
+  git push <远程主机名> <本地分支名>
+  $ git push origin master
+  
+  如果本地版本与远程版本有差异，但又要强制推送可以使用 --force 参数：
+  
+  git push --force origin master
+  删除主机但分支可以使用 --delete 参数，以下命令表示删除 origin 主机的 master 分支：
+  
+  git push origin --delete master
+  ```
+  ###### git pull
+  
+      git pull 命用于从远程获取代码并合并本地的版本。
+  
+  ```shell
+  git pull <远程主机名> <远程分支名>:<本地分支名>
+  
+  $ git pull
+  $ git pull origin
+  
+  将远程主机 origin 的 master 分支拉取过来，与本地的 brantest 分支合并。
+  $ git pull origin master:brantest
+  
+  如果远程分支是与当前分支合并，则冒号后面的部分可以省略。
+  $ git pull origin master
+  ```
+        
+  ###### git remote
+      
+      git remote 命用于在远程仓库的操作。
+      
+  ```shell
+  显示所有远程仓库：
+  $ git remote -v
+  origin  https://github.com/tianqixin/runoob-git-test (fetch)
+  origin  https://github.com/tianqixin/runoob-git-test (push)
+  
+  origin 为远程地址的别名。
+  
+  显示某个远程仓库的信息：
+  git remote show [remote]
+  $ git remote show https://github.com/tianqixin/runoob-git-test
+  
+  ```
+  
   #### 问题 一
+  ```shell
+  git上传代码报错
   
-      git上传代码报错
-      
-      $ ssh -T git@github.com
-      ssh: connect to host github.com port 22: Connection timed out
+  $ ssh -T git@github.com
+  ssh: connect to host github.com port 22: Connection timed out
   
-      
-      $ git push -u origin master
-      fatal: 'git@github.com/wushutong/record.git' does not appear to be a git repository
-      fatal: Could not read from remote repository.
   
-      Please make sure you have the correct access rights
-      and the repository exists.
+  $ git push -u origin master
+  fatal: 'git@github.com/wushutong/record.git' does not appear to be a git repository
+  fatal: Could not read from remote repository.
+  
+  Please make sure you have the correct access rights
+  and the repository exists.
+  ```
   
   >这个时候需要检查一下SSH是否能够连接成功，输入以下命令
   `ssh -T git@github.com`
@@ -127,12 +185,15 @@ content: '''
   
   >如果存在，则新建config文件输入下面内容
   
-  >Host github.com
+  ```txt
+  Host github.com
   User 2656439669@qq.com
   Hostname ssh.github.com
   PreferredAuthentications publickey
   IdentityFile ~/.ssh/id_rsa
   Port 443
+  ```
+  
   
   >其中User后面为GitHub的账号名称(邮箱)
   
@@ -144,16 +205,17 @@ content: '''
   
   >保存之后再次执行"ssh -T git@github.com"时，会出现如下提示，回车"yes"即可
   
-      $ ssh -T git@github.com
-      The authenticity of host '[ssh.github.com]:443 ([18.140.96.234]:443)' can't be established.
-      RSA key fingerprint is SHA256:nThbg6kXUpJWGl7E1IGOCspRomTxdCARLviKw6E5SY8.
-      Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
-      Warning: Permanently added '[ssh.github.com]:443,[18.140.96.234]:443' (RSA) to the list of known hosts.
-      Hi wushutong! You've successfully authenticated, but GitHub does not provide shell access.
-      
-      $ ssh -T git@github.com
-      Hi wushutong! You've successfully authenticated, but GitHub does not provide shell access.
+  ```shell
+  $ ssh -T git@github.com
+  The authenticity of host '[ssh.github.com]:443 ([18.140.96.234]:443)' can't be established.
+  RSA key fingerprint is SHA256:nThbg6kXUpJWGl7E1IGOCspRomTxdCARLviKw6E5SY8.
+  Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+  Warning: Permanently added '[ssh.github.com]:443,[18.140.96.234]:443' (RSA) to the list of known hosts.
+  Hi wushutong! You've successfully authenticated, but GitHub does not provide shell access.
   
+  $ ssh -T git@github.com
+  Hi wushutong! You've successfully authenticated, but GitHub does not provide shell access.
+  ```
   
   #### 生成 ssh key
       
@@ -167,31 +229,31 @@ content: '''
   Enter passphrase (empty for no passphrase):  输入密码
   
   Enter same passphrase again:   再次输入密码
-  
-      $ ssh-keygen -t rsa -C "2656439669@qq.com"
-      Generating public/private rsa key pair.
-      Enter file in which to save the key (/c/Users/Administrator/.ssh/id_rsa):
-      /c/Users/Administrator/.ssh/id_rsa already exists.
-      Overwrite (y/n)? y
-      Enter passphrase (empty for no passphrase):
-      Enter same passphrase again:
-      Your identification has been saved in /c/Users/Administrator/.ssh/id_rsa
-      Your public key has been saved in /c/Users/Administrator/.ssh/id_rsa.pub
-      The key fingerprint is:
-      SHA256:KTRHEO7LiRm1YiwHceMWjhiX2Cv09ZQ7UBEdnFCLo9M 2656439669@qq.com
-      The key's randomart image is:
-      +---[RSA 3072]----+
-      |.oo.+ +BXoo      |
-      |.=o* * +.+.      |
-      |o +.= Ooo.       |
-      |. .= +oB..       |
-      | .. *o+ES        |
-      |   + *.+         |
-      |    o +          |
-      |                 |
-      |                 |
-      +----[SHA256]-----+
-  
+  ```shell
+  $ ssh-keygen -t rsa -C "2656439669@qq.com"
+  Generating public/private rsa key pair.
+  Enter file in which to save the key (/c/Users/Administrator/.ssh/id_rsa):
+  /c/Users/Administrator/.ssh/id_rsa already exists.
+  Overwrite (y/n)? y
+  Enter passphrase (empty for no passphrase):
+  Enter same passphrase again:
+  Your identification has been saved in /c/Users/Administrator/.ssh/id_rsa
+  Your public key has been saved in /c/Users/Administrator/.ssh/id_rsa.pub
+  The key fingerprint is:
+  SHA256:KTRHEO7LiRm1YiwHceMWjhiX2Cv09ZQ7UBEdnFCLo9M 2656439669@qq.com
+  The key's randomart image is:
+  +---[RSA 3072]----+
+  |.oo.+ +BXoo      |
+  |.=o* * +.+.      |
+  |o +.= Ooo.       |
+  |. .= +oB..       |
+  | .. *o+ES        |
+  |   + *.+         |
+  |    o +          |
+  |                 |
+  |                 |
+  +----[SHA256]-----+
+  ```
       命令行复制key的命令如下：
       clip < ~/.ssh/id_rsa.pub   执行完毕直接去服务端粘贴即可
       
@@ -259,8 +321,8 @@ content: '''
 '''
 linesHighlighted: [
   89
-  150
-  201
+  311
+  147
 ]
 isStarred: false
 isTrashed: false
