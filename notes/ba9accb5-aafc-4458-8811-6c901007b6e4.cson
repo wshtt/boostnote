@@ -1,11 +1,76 @@
 createdAt: "2020-09-21T03:40:32.276Z"
-updatedAt: "2020-09-22T10:45:16.106Z"
+updatedAt: "2020-09-23T15:23:27.665Z"
 type: "MARKDOWN_NOTE"
 folder: "ff82907153aa97c03b03"
 title: "Git"
 tags: []
 content: '''
   # Git
+  
+  ### 一、 Git 与 Svn
+  
+        1、Git 是分布式的，SVN 不是：这是 Git 和其它非分布式的版本控制系统，例如 SVN，CVS 等，最核心的区别。
+  
+        2、Git 把内容按元数据方式存储，而 SVN 是按文件：所有的资源控制系统都是把文件的元信息隐藏在一个类似 .svn、.cvs 等的文件夹里。
+  
+        3、Git 分支和 SVN 的分支不同：分支在 SVN 中一点都不特别，其实它就是版本库中的另外一个目录。
+  
+        4、Git 没有一个全局的版本号，而 SVN 有：目前为止这是跟 SVN 相比 Git 缺少的最大的一个特征。
+  
+        5、Git 的内容完整性要优于 SVN：Git 的内容存储使用的是 SHA-1 哈希算法。这能确保代码内容的完整性，确保在遇到磁盘故障和网络问题时降低对版本库的破坏。
+  
+  **⚠ 您粘贴了一个链接，但在此文档的存储位置中找不到对应的附件。仅当附件和文档在同一存储位置时，才支持粘贴引用附件的链接。请将附件拖放到文档内！⚠**
+  
+  ### 二、 安装配置
+  
+  ##### 一、
+  >在使用Git前我们需要先安装 Git。Git 目前支持 Linux/Unix、Solaris、Mac和 Windows 平台上运行。
+  
+  >Git 各平台安装包下载地址为：http://git-scm.com/downloads
+  
+  ##### 二、Windows 平台上安装
+  >国内的镜像：https://npm.taobao.org/mirrors/git-for-windows/
+  
+  >完成安装之后，就可以使用命令行的 git 工具（已经自带了 ssh 客户端）了，另外还有一个图形界面的 Git 项目管理工具。
+  
+  >在开始菜单里找到"Git"->"Git Bash"，会弹出 Git 命令窗口，你可以在该窗口进行 Git 操作。
+  
+  **⚠ 您粘贴了一个链接，但在此文档的存储位置中找不到对应的附件。仅当附件和文档在同一存储位置时，才支持粘贴引用附件的链接。请将附件拖放到文档内！⚠**
+  
+  ### 三、 Git 配置
+  
+      Git 提供了一个叫做 git config 的工具，专门用来配置或读取相应的工作环境变量。
+      这些环境变量，决定了 Git 在各个环节的具体工作方式和行为。这些变量可以存放在以下三个不同的地方：
+  
+  >/etc/gitconfig 文件：系统中对所有用户都普遍适用的配置。若使用 git config 时用 --system 选项，读写的就是这个文件。
+  
+  >~/.gitconfig 文件：用户目录下的配置文件只适用于该用户。若使用 git config 时用 --global 选项，读写的就是这个文件。
+  
+  >当前项目的 Git 目录中的配置文件（也就是工作目录中的 .git/config 文件）：这里的配置仅仅针对当前项目有效。每一个级别的配置都会覆盖上层的相同配置，所以 .git/config 里的配置会覆盖 /etc/gitconfig 中的同名变量。
+  
+  ###### 1. 用户信息
+      
+      设置用户信息
+        $ git config --global user.name "Your Name"
+        $ git config --global user.email "email@example.com"
+      
+      查看用户信息
+        $ git config user.name
+        $ git config user.email
+      直接找到 C:\\Users\\26564\\.gitconfig 修改
+        [user]
+          name = wu
+          email = 2656439669@qq.com      
+  
+  >如果要在某个特定的项目中使用其他名字或者电邮，只要去掉 --global 选项重新配置即可，新的设定保存在当前项目的 .git/config 文件里。
+  
+  ###### 2. 
+  
+      查看配置信息
+        $ git config --list
+      
+      打开配置文件内容
+        $ vim ~/.gitconfig
   
   #### 工作流程
   
@@ -320,9 +385,9 @@ content: '''
         fatal: remote origin already exists. 
 '''
 linesHighlighted: [
-  89
-  311
-  147
+  154
+  376
+  212
 ]
 isStarred: false
 isTrashed: false
