@@ -1,11 +1,11 @@
 createdAt: "2020-05-24T03:00:21.248Z"
-updatedAt: "2020-07-17T03:32:30.378Z"
+updatedAt: "2020-09-23T07:44:00.117Z"
 type: "MARKDOWN_NOTE"
 folder: "f641fe3577d5d5a32c12"
-title: "mybatis plus"
+title: "Mybatis plus"
 tags: []
 content: '''
-  # mybatis plus
+  # Mybatis plus
   
   介绍 ：在 mybatis 的基础上只做增强不做改变，简化开发，提高效率。
   
@@ -183,6 +183,36 @@ content: '''
           wrapper1.like(User::getName,"雨").it(User::getAge,40);
           wrapper2.like(User::getName,"雨").and(w -> w.eq(User::getAge,40).or().isNotNull(User::getName));
           
+  ### 问题
+  
+  ---
+  #### mybatis plus in （字符串数组）的问题
+  
+  
+  ```java
+  // wrapper 使用 apply 拼接 sql 函数
+  String str = "";
+  str += "add_user";
+  str += ",";
+  str += "add_user_park";
+  str += ",";
+  str += "s";
+  wrapper.apply("FIND_IN_SET(appcode,+" str "+)");
+  wrapper.apply("FIND_IN_SET(appcode,{0})",str);
+  // {0} 代表第一个参数， 这种传参可以减少sql 注入问题
+  ```
+  ---
+  ```SQL
+  # FIND_IN_SET(str,strlist)  
+  # str 指的是输入的字符
+  # strlist 指的是集合转换成的字符串
+  select FIND_IN_SET('b', 'a，b，c'); # 结果 2 存在则返回未知
+  select FIND_IN_SET('d', 'a，b，c'); # 结果 0 不存在返回0
+  select FIND_IN_SET('1', '1');
+  
+  # 不能使用 in 的原因
+  # in() 接收常量字符串，接收数字类型变量与常量
+  ```
 '''
 linesHighlighted: []
 isStarred: false
