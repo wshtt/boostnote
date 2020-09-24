@@ -1,5 +1,5 @@
 createdAt: "2020-09-21T03:40:32.276Z"
-updatedAt: "2020-09-24T02:50:03.644Z"
+updatedAt: "2020-09-24T10:33:02.125Z"
 type: "MARKDOWN_NOTE"
 folder: "ff82907153aa97c03b03"
 title: "Git"
@@ -84,58 +84,73 @@ content: '''
   >在修改完成后，如果发现错误，可以撤回提交并再次修改并提交。
   >
   
+  ### 四、Git 使用
   #### 创建 Git 仓库
       
-      初始化当前目录，该命令执行完后会在当前目录生成一个 .git 目录。使用我们指定目录作为Git仓库。
-      git init
-      
-      初始化当前目录下的指定文件夹
-      git init newrepo
+  -------------------------------------------
+  ###### git init 初始化仓库
+  ```shell
+  初始化当前目录，该命令执行完后会在当前目录生成一个 .git 目录。使用我们指定目录作为Git仓库。
+  git init
   
-      克隆项目  [url] 是你要拷贝的项目
-      git clone [url]  
-      
-      在当前目录下创建一个名为grit的目录，作为git 仓库。
-      $ git clone $ git clone git@github.com:wushutong/boostnote.git
-      指定 mygrit 文件夹为 git 仓库
-      $ git clone $ git clone git@github.com:wushutong/boostnote.git mygrit
-      
-      显示当前 git 配置信息
-      $ git config --list
-      
-      编辑 git 配置文件
-      $ git config -e    # 针对当前仓库 
-      $ git config -e --global   # 针对系统上所有仓库
-      如果去掉 --global 参数只对当前仓库有效。
-      
-  #### 常用命令
+  初始化当前目录下的指定文件夹
+  git init newrepo
   
-  ![1622372b.png](:storage\\ba9accb5-aafc-4458-8811-6c901007b6e4\\1622372b.png)
+  ```
   
-  >workspace：工作区
-  staging area：暂存区/缓存区
-  local repository：或本地仓库
-  remote repository：远程仓库
+  ----------------------------------------
+  ###### git clone 克隆项目
+  ```shell
+  克隆项目  [url] 是你要拷贝的项目
+  git clone [url]  
   
-  
+  在当前目录下创建一个名为 boostnote 的目录，作为git 仓库。
+  $ git clone $ git clone git@github.com:wushutong/boostnote.git
+  指定 mygrit 文件夹为 git 仓库
+  $ git clone $ git clone git@github.com:wushutong/boostnote.git mygrit
+  ```
+  ----------------------------------
   ###### git add
-        git add 命令可将该文件添加到暂存区。
+  ```shell
+  git add 命令可将该文件添加到暂存区。
   
-        添加一个或多个文件到暂存区：
-        git add [file1] [file2] ...
-        git add a b.java c.txt ...
-        
-        添加指定目录到暂存区，包括子目录：
-        git add [dir]
-        
-        添加当前目录下的所有文件到暂存区：
-        git add .
+  添加一个或多个文件到暂存区：
+  $ git add [file1] [file2] ...
+  $ git add a b.java c.txt ...
   
+  添加指定目录到暂存区，包括子目录：
+  $ git add [dir]
+  
+  添加当前目录下所有untrack的文件都加入暂存区，并且会根据.gitignore做过滤
+  $ git add .
+  
+  忽略 .gitignore 过滤文件
+  $ git add *
+  ```
+  
+  -----------------------------------------
   ###### git status
-        git status 命令用于查看在你上次提交之后是否有对文件进行再次修改。
-        分为好几个标识符？？？？？？
-        
+  ```shell
+  命令用于查看在你上次提交之后是否有对文件进行再次修改。
+  $ git status
+  
+  获取简短的结果 
+  $ git status -s   $ git status --short
+  
+  A: 你本地新增的文件（服务器上没有）
+  C: 文件的一个新拷贝
+  D: 你本地删除的文件（服务器上还在）
+  M: 文件的内容或者mode被修改了
+  R: 文件名被修改了
+  T: 文件的类型被修改了
+  U: 文件没有被合并(你需要完成合并才能进行提交)
+  X: 未知状态(很可能是遇到git的bug了，你可以向git提交bug report)
+  ？：未被git进行管理，可以使用git add file1把file1添加进git能被git所进行管理
+  ```
+  
+  -------------------------------------------
   ###### git diff
+  ```shell
         git diff 命令比较文件的不同，即比较文件在暂存区和工作区的差异。
         
         显示暂存区和工作区的差异:
@@ -148,21 +163,28 @@ content: '''
         
         显示两次提交之间的差异:
         $ git diff [first-branch]...[second-branch]
+  
+  ```
         
+  ------------------------------------------
   ###### git commit
-        git commit 命令将暂存区内容添加到本地仓库中。
+  ```shell
+        $ git commit 命令将暂存区内容添加到本地仓库中。
         
         提交暂存区到本地仓库中: 要输入日志消息 ""
-        git commit -m [message]
+        $ git commit -m [message]
   
         提交暂存区的指定文件到仓库区：
         $ git commit [file1] [file2] ... -m [message]
         
         -a 参数设置修改文件后不需要执行 git add 命令，直接来提交 跳过add，相当于自动add
         $ git commit -a
-        
+        $ git commit -am 'msg' 示例
+  ```
+  
+  ---------------------------------------------
   ###### git push
-        
+  
         git push 命用于从将本地的分支版本上传到远程并合并。
   
   ```shell
@@ -182,6 +204,8 @@ content: '''
   
   git push origin --delete master
   ```
+  
+  ----------------------------------
   ###### git pull
   
       git pull 命用于从远程获取代码并合并本地的版本。
@@ -198,13 +222,16 @@ content: '''
   如果远程分支是与当前分支合并，则冒号后面的部分可以省略。
   $ git pull origin master
   ```
-        
+  --------------------------------      
   ###### git remote
       
-      git remote 命用于在远程仓库的操作。
+      git remote 命令用于在远程仓库的操作。
       
   ```shell
-  显示所有远程仓库：
+  列出已经存在的远程地址名称
+  $ git remote 
+  
+  显示所有远程仓库：在每一个名字后面列出其远程url
   $ git remote -v
   origin  https://github.com/tianqixin/runoob-git-test (fetch)
   origin  https://github.com/tianqixin/runoob-git-test (push)
@@ -215,7 +242,207 @@ content: '''
   git remote show [remote]
   $ git remote show https://github.com/tianqixin/runoob-git-test
   
+  添加远程版本库：
+  git remote add [shortname] [url]
+  $ git remote add origin git@github.com:tianqixin/runoob-git-test.git
+  
+  git remote rm name  # 删除远程仓库
+  git remote rename old_name new_name  # 修改仓库名
+  
   ```
+  
+  --------------------------------------
+  ###### git fetch  git merge
+      git fetch 命用于从远程获取代码库。
+  ```shell
+  
+  获取服务端修改的代码
+  $ git fetch origin 
+  
+  合并代码
+  $ git merge origin/master
+  ```
+      
+  ----------------------------------------
+  ###### git log 查看日志
+  ```shell
+  查看所有提交日志
+  $ git log
+  
+  查看简洁的日志
+  $ git log --oneline
+  
+  反序展示日志
+  $ git log --reverse
+  
+  查看指定文件修改记录
+  $ git blame 文件名
+  
+  ```
+  
+  ------------------------------
+  ###### git reset
+      git reset 命令用于回退版本，可以指定退回某一次提交的版本。
+  ```shell
+  $ git reset HEAD^            # 回退所有内容到上一个版本  
+  $ git reset HEAD^ hello.php  # 回退 hello.php 文件的版本到上一个版本  
+  $ git  reset  052e           # 回退到指定版本
+  
+  
+  git reset --soft HEAD   回退到某个版本
+  git reset --hard HEAD   回退到某个版本并删除所有修改
+  
+  $ git reset –hard HEAD~3  # 回退上上上一个版本  
+  $ git reset –hard bae128  # 回退到某个版本回退点之前的所有信息。 
+  $ git reset --hard origin/master    # 将本地的状态回退到和远程的一样 
+  
+  清除 add
+  git reset HEAD 文件名
+  ```
+        HEAD 说明：
+          HEAD 表示当前版本
+          HEAD^ 上一个版本
+          HEAD^^ 上上一个版本
+          HEAD^^^ 上上上一个版本
+          以此类推...
+  
+          可以使用 ～数字表示
+          HEAD~0 表示当前版本
+          HEAD~1 上一个版本
+          HEAD^2 上上一个版本
+          HEAD^3 上上上一个版本
+          以此类推...
+          
+  ----------------------------------
+  ###### git rm 删除
+  ```shell
+  删除暂存区和工作区中的文件
+  git rm 文件名
+  
+  如果删除之前修改过并放到了暂存区 -f 强制
+  git rm -f 文件名
+  
+  仅从暂存区删除
+  git rm --cached 文件名
+  
+  递归删除
+  git rm -r *
+  
+  删库跑路
+  git rm -rf *
+  
+  ```
+  
+  -----------------------------------
+  ###### git mv
+      git mv 命令用于移动或重命名一个文件、目录或软连接。
+  ```shell
+  改名
+  git mv [file] [newfile]
+  
+  强制改名
+  git mv -f [file] [newfile]
+  ```
+  
+  ------------------------------------
+  ###### git 分支
+  ```shell
+  列出本地分支 *开头代表当前分支
+  $ git branch
+  
+  创建分支 test
+  $ git branch test
+  
+  切换分支到 test
+  $ git checkout test
+  
+  创建新分支并切换到新分支
+  $ git checkout -b test
+  
+  删除分支
+  $ git checkout -d test
+  
+  将其他分支合并到当前分支
+  $ git merge test
+  ```
+  
+  ------------------------------
+  ###### git tag
+  ```shell
+  查看所有标签
+  $ git tag
+  
+  对项目打标签 v1.0 -a代表可以对这个版本进行说明注释
+  $ git tag -a v1.0 
+  
+  对历史提交进行打标签
+  $ git tag -a v1.0 85fd8
+  
+  删除标签
+  $ git tag -d v1.0
+  
+  查看此版本的修改
+  $ git show v1.0
+  ```
+  
+  ------------------------------
+  ###### 搭建 git 服务器
+  ```shell
+  # 例 centOS
+  # 1. 安装 git
+  $ yum install curl-devel expat-devel gettext-devel openssl-devel zlib-devel perl-devel
+  $ yum install git
+  
+  # 接下来我们 创建一个git用户组和用户，用来运行git服务：
+  $ groupadd git
+  $ useradd git -g git
+  
+  # 2、创建证书登录
+  # 收集所有需要登录的用户的公钥，公钥位于id_rsa.pub文件中，把我们的公钥导入到/home/git/.ssh/authorized_keys文件里，一行一个。
+  # 如果没有该文件创建它：
+  
+  $ cd /home/git/
+  $ mkdir .ssh
+  $ chmod 755 .ssh
+  $ touch .ssh/authorized_keys
+  $ chmod 644 .ssh/authorized_keys
+  
+  # 3、初始化Git仓库
+  # 首先我们选定一个目录作为Git仓库，假定是/home/gitrepo/runoob.git，在/home/gitrepo目录下输入命令：
+  
+  $ cd /home
+  $ mkdir gitrepo
+  $ chown git:git gitrepo/
+  $ cd gitrepo
+  $ git init --bare runoob.git
+  
+  # 以上命令Git创建一个空仓库，服务器上的Git仓库通常都以.git结尾。然后，把仓库所属用户改为git：
+  $ chown -R git:git runoob.git
+  
+  # 4、克隆仓库
+  $ git clone git@192.168.45.4:/home/gitrepo/runoob.git
+  ```
+  
+      
+      显示当前 git 配置信息
+      $ git config --list
+      
+      编辑 git 配置文件
+      $ git config -e    # 针对当前仓库 
+      $ git config -e --global   # 针对系统上所有仓库
+      如果去掉 --global 参数只对当前仓库有效。
+      
+  #### 常用命令
+  
+  ![1622372b.png](:storage\\ba9accb5-aafc-4458-8811-6c901007b6e4\\1622372b.png)
+  
+  >workspace：工作区
+  staging area：暂存区/缓存区
+  local repository：或本地仓库
+  remote repository：远程仓库
+  
+  
+  
   
   #### 问题 一
   ```shell
@@ -385,9 +612,9 @@ content: '''
         fatal: remote origin already exists. 
 '''
 linesHighlighted: [
-  154
-  376
-  212
+  524
+  746
+  582
 ]
 isStarred: false
 isTrashed: false
